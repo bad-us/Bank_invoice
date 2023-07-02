@@ -9,6 +9,8 @@ def selectDir():
 # Выбор пути до папки
 def FolderPath(directory):
     global files
+    global directory_path_file
+    directory_path_file = directory
     fileDir=directory.replace('/', '\\')
     fileExt = r".pdf"
     files = [os.path.join(fileDir, _) for _ in os.listdir(fileDir) if _.endswith(fileExt)]
@@ -28,6 +30,7 @@ def FilePath(directory):
 def StartCopy(files,file):
     #print(files)
     #print(file)
+    #print(directory_path_file)
     path_string = os.path.pathsep.join(file)
     mydict={}
     with open(path_string, encoding="utf8") as f:
@@ -37,6 +40,17 @@ def StartCopy(files,file):
             k, v = [word.strip() for word in line.split("-")]
             mydict[k] = v
     print(mydict)
+
+    i = 0
+    directory2 = "C:\\Users\\v.panin\\Desktop\\test2\\"
+    while files:
+        path = files[0]
+        if not os.path.isfile(f'{directory_path_file}{i}.pdf'):
+            name = f'{i}.pdf'
+            os.rename(path, directory2 + name)
+            del files[0]
+        i += 1
+
 
 # Создание окна
 root = Tk()
@@ -56,14 +70,3 @@ b4 = Button(root, text='Закрыть окно', command=lambda: root.destroy()
 b4.grid(row=2,column=2)
 
 root.mainloop()
-
-
-# i=0
-#    while files:
-#        file=files[0]
-#        ext=file.split('.')[-1]
-#        if not os.path.isfile(f'{directory}{i}.{ext}'):
-#            name = f'{i}.{ext}'
-#            os.rename(directory1+file, directory1+name)
-#            del files[0]
-#        i+=1
