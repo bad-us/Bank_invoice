@@ -39,7 +39,7 @@ def StartCopy(files, file):
         for line in f:
             if not line.strip():
                 continue
-            k, v = [word.strip() for word in line.split("-")]
+            k, v = [word.strip() for word in line.split(" - ")]
             mydict[k] = v
     print(mydict)
 
@@ -76,7 +76,7 @@ def name_invoice(id_invoice):
     if id_invoice[1] == id_invoice[4]:
         name_file_invoice = f'{id_invoice[3]}_{id_invoice[2]}_{id_invoice[1]}'
     else:
-        name_file_invoice = f'{id_invoice[3]}_{id_invoice[2]}_{id_invoice[4]}-{id_invoice[1]}'
+        name_file_invoice = f'{id_invoice[3]}_{id_invoice[2]}_{id_invoice[1]}-{id_invoice[4]}'
     return (name_file_invoice)
 
 
