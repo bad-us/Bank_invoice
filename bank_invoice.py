@@ -41,7 +41,7 @@ def StartCopy(files, file):
                 continue
             k, v = [word.strip() for word in line.split(" - ")]
             mydict[k] = v
-    print(mydict)
+    # print(mydict)
 
     i = 0
 
@@ -51,8 +51,11 @@ def StartCopy(files, file):
         id_path = get_key(mydict, id_invoice[0])  # путь по значению
         # print(id_invoice[0])
         id_path = str(id_path)
-        if id_path == 'None':
+        name = f'{name_invoice(id_invoice)}.pdf'
+        if (id_path == 'None' or os.path.exists(id_path + name) == True): # проверка на имеющийся файл :
+            print(f"Файл {id_path}{name} существует. Переходим к следующему")
             del files[0]
+            i += 1
         else:
             copy_path = id_path
             # print(type(id_path))
